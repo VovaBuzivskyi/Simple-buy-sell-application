@@ -18,11 +18,11 @@ public class ImageController {
     private final ImageRepository imageRepository;
 
     @GetMapping("/image/{id}")
-    public ResponseEntity<?> getImageById(@PathVariable Long id){
-        Image image = imageRepository.findById(id).orElse(null) ;
+    public ResponseEntity<InputStreamResource> getImageById(@PathVariable Long id) {
+        Image image = imageRepository.findById(id).orElse(null);
         assert image != null;
         return ResponseEntity.ok()
-                .header("FileName",image.getOriginalFileName())
+                .header(image.getOriginalFileName())
                 .contentType(MediaType.valueOf(image.getContentType()))
                 .contentLength(image.getSize())
                 .body(new InputStreamResource(new ByteArrayInputStream(image.getBytes())));

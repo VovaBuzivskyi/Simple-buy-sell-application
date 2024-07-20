@@ -4,6 +4,7 @@ import com.vovabuzivskyi.buysell.models.Image;
 import com.vovabuzivskyi.buysell.models.Product;
 import com.vovabuzivskyi.buysell.repositories.ProductsRepository;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.log4j.Log4j;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -30,7 +31,7 @@ public class ProductService {
         Image image1;
         Image image2;
         Image image3;
-        if(!file1.isEmpty()) {
+        if (!file1.isEmpty()) {
             image1 = fileToImage(file1);
             image1.setPreviewImage(true);
             product.setImageToProduct(image1);
@@ -44,6 +45,7 @@ public class ProductService {
             product.setImageToProduct(image3);
         }
         productsRepository.save(product);
+
     }
 
     private Image fileToImage(MultipartFile file1) throws IOException {

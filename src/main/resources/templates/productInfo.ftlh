@@ -10,7 +10,7 @@
 <h2>Product info</h2>
 
 <#list images as image>
-<img src="/image/${image.id}" height="200px" alt="empty photo">
+    <img src="/image/${image.id}" height="200px" alt="empty photo">
 </#list>
 <br>
 Name: <b>${product.title}</b><br>

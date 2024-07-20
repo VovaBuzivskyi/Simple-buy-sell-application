@@ -24,15 +24,13 @@ public class Image {
     @Column(name = "content_type")
     private String contentType;
     @Lob
-    @Column(name = "image_in_bytes",columnDefinition = "MEDIUMBLOB")
+    @Column(name = "image_in_bytes", columnDefinition = "MEDIUMBLOB")
     private byte[] bytes;
     @Column(name = "is_preview_image")
     private boolean isPreviewImage;
 
     @ManyToOne(cascade = CascadeType.REFRESH, fetch = FetchType.EAGER)
-    private Product product ;
-
-
+    private Product product;
 
 
 }
