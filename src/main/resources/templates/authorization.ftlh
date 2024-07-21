@@ -13,7 +13,7 @@
     Password: <input type="password" name="password"/><br><br>
     Email: <input type="email" name="email"/><br><br>
     Phone number: <input type="text" name="phone"/><br><br>
-    <input type="hidden" name="_csrf" value="${_csrf.token}">
+<#--    <input type="hidden" name="_csrf" value="${_csrf.token}">-->
     <input type="submit" value="Sign in">
 </form>
 </body>

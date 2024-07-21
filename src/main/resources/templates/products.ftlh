@@ -5,12 +5,12 @@
     <title>BUYSELL</title>
 </head>
 <body>
-<h1>BUYSELL | </h1><a href="/login">Log in</a><br><br>
-<form action="/logout" method="post">
-    <input type="submit" value="Log out">
-</form>
-<input type="hidden" name="_csrf" value="${_csrf.token}">
+<h1>BUYSELL </h1><a href="/login">Log in </a>|*|
+<a href="/authorization"> Create account</a>|*|
+<a href="/logout">Logout</a>
+
 <h2>Products from whole country</h2>
+
 <form action="/" method="get">
     <label>
         Print name here--> <input type="text" name="title"/>
@@ -29,7 +29,7 @@
 <hr>
 <h3>Create new Product</h3>
 
-<form action="/product/create" method="post" enctype="multipart/form-data">
+<form action="product/create" method="post" enctype="multipart/form-data">
 
     Advertisement name<input type="text" name="title"/><br><br>
     Description <input type="text" name="description"/><br><br>
@@ -43,6 +43,6 @@
     <input type="submit" value="Add product">
 
 </form>
-
+<a href="/hello">Check access</a>
 </body>
 </html>

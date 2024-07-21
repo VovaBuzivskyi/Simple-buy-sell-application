@@ -11,7 +11,6 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
-
 import java.io.IOException;
 
 
@@ -37,7 +36,7 @@ public class ProductController {
     @PostMapping("product/create")
     public String saveProduct(@RequestParam(name = "file1", required = false) MultipartFile file1,
                               @RequestParam(name = "file2", required = false) MultipartFile file2,
-                              @RequestParam(name = "file3", required = false) MultipartFile file3, Product product) throws IOException {
+                              @RequestParam(name = "file3", required = false) MultipartFile file3,Product product) throws IOException {
         productService.saveProduct(product, file1, file2, file3);
         return "redirect:/";
     }

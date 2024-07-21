@@ -2,10 +2,10 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>BUYSELL</title>
+    <title >BUYSELL</title>
 </head>
 <body>
-<h1>BUYSELL</h1>
+<h1 class="text-center"> BUYSELL</h1>
 <hr>
 <h2>Product info</h2>
 
