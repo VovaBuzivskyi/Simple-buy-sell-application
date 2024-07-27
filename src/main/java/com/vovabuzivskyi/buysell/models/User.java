@@ -7,9 +7,7 @@ import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import java.time.LocalDateTime;
-import java.util.Collection;
-import java.util.HashSet;
-import java.util.Set;
+import java.util.*;
 
 
 @Entity
@@ -22,7 +20,7 @@ public class User implements UserDetails {
     private Long id;
     @Column(name = "name")
     private String name;
-    @Column(name = "email", unique = true)
+    @Column(name = "email", unique = true, nullable = false)
     private String email;
     @Column(name = "password", length = 1000)
     private String password;
@@ -35,6 +33,8 @@ public class User implements UserDetails {
     private Image avatar;
     @Column(name = "date_of_registretion")
     private LocalDateTime dateOfCreate;
+    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER, mappedBy = "user")
+    private List<Product> products = new ArrayList<>();
 
     @ElementCollection(targetClass = Roles.class, fetch = FetchType.EAGER)
     @CollectionTable(name = "user_role", joinColumns = @JoinColumn(name = "user_id"))
@@ -47,6 +47,10 @@ public class User implements UserDetails {
     }
 
     //Authentication (spring security)
+
+    public boolean isAdmin() {
+        return roles.contains(Roles.ROLE_ADMIN);
+    }
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {

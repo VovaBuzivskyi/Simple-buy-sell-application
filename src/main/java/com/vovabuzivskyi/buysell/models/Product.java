@@ -5,6 +5,7 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.security.Principal;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -27,8 +28,10 @@ public class Product {
     private int price;
     @Column(name = "city")
     private String city;
-    @Column(name = "author")
-    private String author;
+
+    @ManyToOne(cascade = CascadeType.REFRESH, fetch = FetchType.LAZY)
+    @JoinColumn
+    private User user = new User();
 
     @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "product")
     private List<Image> images = new ArrayList<>();
@@ -37,4 +40,5 @@ public class Product {
         image.setProduct(this);
         images.add(image);
     }
+
 }

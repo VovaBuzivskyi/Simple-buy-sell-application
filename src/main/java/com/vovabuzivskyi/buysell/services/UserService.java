@@ -9,6 +9,9 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import java.util.*;
+import java.util.stream.Collectors;
+
 
 @Service
 @RequiredArgsConstructor
@@ -28,4 +31,28 @@ public class UserService {
         return true;
     }
 
+    public List<User> allUsers() {
+        return userRepository.findAll();
+    }
+
+    public void userBan(Long id) {
+        User user = userRepository.findById(id).orElse(null);
+        if (user != null) {
+            user.setActive(!user.isActive());
+        }
+        userRepository.save(user);
+    }
+
+    public void changeRole(User user, Map<String, String> boxes) {
+        Set<String> roles = Arrays.stream(Roles.values())
+                .map(Roles::name)
+                .collect(Collectors.toSet());
+        user.getRoles().clear();
+        for (String key : boxes.keySet()) {
+            if (roles.contains(key)) {
+                user.getRoles().add(Roles.valueOf(key));
+            }
+            userRepository.save(user);
+        }
+    }
 }

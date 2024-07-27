@@ -11,7 +11,9 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
+
 import java.io.IOException;
+import java.security.Principal;
 
 
 @Controller
@@ -21,8 +23,9 @@ public class ProductController {
     private final ProductService productService;
 
     @GetMapping("/")
-    public String getProducts(@RequestParam(name = "title", required = false) String title, Model model) {
+    public String getProducts(@RequestParam(name = "title", required = false) String title, Model model, Principal principal) {
         model.addAttribute("products", productService.getProducts(title));
+        model.addAttribute("user", productService.setUserByPrincipal(principal));
         return "products";
     }
 
@@ -30,14 +33,16 @@ public class ProductController {
     public String productInfo(@PathVariable Long id, Model model) {
         model.addAttribute("product", productService.getProductById(id));
         model.addAttribute("images", productService.getProductById(id).getImages());
+        model.addAttribute("user", productService.getProductById(id).getUser());
         return "productInfo";
     }
 
     @PostMapping("product/create")
     public String saveProduct(@RequestParam(name = "file1", required = false) MultipartFile file1,
                               @RequestParam(name = "file2", required = false) MultipartFile file2,
-                              @RequestParam(name = "file3", required = false) MultipartFile file3,Product product) throws IOException {
-        productService.saveProduct(product, file1, file2, file3);
+                              @RequestParam(name = "file3", required = false) MultipartFile file3,
+                              Product product, Principal principal) throws IOException {
+        productService.saveProduct(principal, product, file1, file2, file3);
         return "redirect:/";
     }
 
