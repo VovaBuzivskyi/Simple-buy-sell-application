@@ -61,14 +61,14 @@ public class ProductService {
         return userRepository.findByEmail(principal.getName());
     }
 
-    private Image fileToImage(MultipartFile file1) throws IOException {
+    private Image fileToImage(MultipartFile file) throws IOException {
         Image image = new Image();
 
-        image.setName(file1.getName());
-        image.setOriginalFileName(file1.getOriginalFilename());
-        image.setContentType(file1.getContentType());
-        image.setSize(file1.getSize());
-        image.setBytes(file1.getBytes());
+        image.setName(file.getName());
+        image.setOriginalFileName(file.getOriginalFilename());
+        image.setContentType(file.getContentType());
+        image.setSize(file.getSize());
+        image.setBytes(file.getBytes());
         return image;
     }
 

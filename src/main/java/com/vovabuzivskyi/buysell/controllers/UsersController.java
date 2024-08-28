@@ -9,12 +9,18 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 
 @Controller
 @RequiredArgsConstructor
 public class UsersController {
     private final UserService userService;
+
+    @GetMapping("/login")
+    public String login() {
+        return "login";
+    }
 
     @GetMapping("/authorization")
     public String authorization() {
@@ -37,11 +43,5 @@ public class UsersController {
         model.addAttribute("products", user.getProducts());
         return "userInfo";
     }
-
-    @GetMapping("/hello")
-    public String hello() {
-        return "hello";
-    }
-
 
 }
